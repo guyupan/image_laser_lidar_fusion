@@ -96,7 +96,7 @@ void test()
     {
     std::vector<pointXYZRGB>  lidar_points;
     Mat image;
-    int n = i;
+    int n = 1;
     std::string lidar_points_file = "./demo(1)/lidar_right/";
     std::string image_file = "_L.png";
     std::string str1, str2, str3;

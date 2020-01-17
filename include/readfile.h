@@ -7,9 +7,10 @@
 #include <opencv2/core/eigen.hpp>
 #include "pointXYZRGB.h"
 
-    Eigen::Matrix4d eigen_T;
-    Eigen::Matrix3d eigen_Cam_intrin;
-    Eigen::Matrix<double, 5, 1> eigen_Cam_dist;
+Eigen::Matrix4d eigen_T;
+Eigen::Matrix3d eigen_Cam_intrin;
+Eigen::Matrix<double, 5, 1> eigen_Cam_dist;
+std::vector<pointXYZRGB> lidar_points;
 
 std::vector<pointXYZRGB> readpointcloud( std::string& filename )
 {   
