@@ -49,11 +49,11 @@ rule CXX_COMPILER__datafusion
 
 
 #############################################
-# Rule for linking CXX static library.
+# Rule for linking CXX shared library.
 
-rule CXX_STATIC_LIBRARY_LINKER__datafusion
-  command = $PRE_LINK && /usr/bin/cmake -E remove $TARGET_FILE && /usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /usr/bin/ranlib $TARGET_FILE && $POST_BUILD
-  description = Linking CXX static library $TARGET_FILE
+rule CXX_SHARED_LIBRARY_LINKER__datafusion
+  command = $PRE_LINK && /usr/bin/c++  -fPIC $LANGUAGE_COMPILE_FLAGS $ARCH_FLAGS $LINK_FLAGS -shared $SONAME_FLAG$SONAME -o $TARGET_FILE $in $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
+  description = Linking CXX shared library $TARGET_FILE
   restat = $RESTAT
 
 

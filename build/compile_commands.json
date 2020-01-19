@@ -1,13 +1,19 @@
 [
 {
   "directory": "/home/guyu/image-lidar-fusion/build",
-  "command": "/usr/bin/c++   -DGFLAGS_DLL_DECLARE_FLAG=\"\" -DGFLAGS_DLL_DEFINE_FLAG=\"\" -DGFLAGS_IS_A_DLL=0 -DGOOGLE_GLOG_DLL_DECL=\"\" -I../include -isystem /usr/local/include -I/usr/local/include/eigen3 -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv  -g   -std=c++11 -o CMakeFiles/main.dir/src/main.o -c /home/guyu/image-lidar-fusion/src/main.cpp",
-  "file": "/home/guyu/image-lidar-fusion/src/main.cpp"
+  "command": "/usr/bin/c++   -DGFLAGS_DLL_DECLARE_FLAG=\"\" -DGFLAGS_DLL_DEFINE_FLAG=\"\" -DGFLAGS_IS_A_DLL=0 -DGOOGLE_GLOG_DLL_DECL=\"\" -I../include -isystem /usr/local/include -I/usr/local/include/eigen3 -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv -I/usr/local/dinclude/eigen3  -g   -std=c++11 -o CMakeFiles/main.dir/main.o -c /home/guyu/image-lidar-fusion/main.cpp",
+  "file": "/home/guyu/image-lidar-fusion/main.cpp"
 },
 
 {
   "directory": "/home/guyu/image-lidar-fusion/build",
-  "command": "/usr/bin/c++    -I../include -I/usr/local/include -I/usr/local/include/eigen3 -I/opt/ros/kinetic/include/opencv-3.3.1-dev -I/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv  -g   -std=c++11 -o CMakeFiles/datafusion.dir/src/readfile.o -c /home/guyu/image-lidar-fusion/src/readfile.cc",
+  "command": "/usr/bin/c++   -Ddatafusion_EXPORTS -I../include -I/usr/local/include -I/usr/local/include/eigen3 -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv -I/usr/local/dinclude/eigen3  -g -fPIC   -std=c++11 -o CMakeFiles/datafusion.dir/src/readfile.o -c /home/guyu/image-lidar-fusion/src/readfile.cc",
   "file": "/home/guyu/image-lidar-fusion/src/readfile.cc"
+},
+
+{
+  "directory": "/home/guyu/image-lidar-fusion/build",
+  "command": "/usr/bin/c++   -Ddatafusion_EXPORTS -I../include -I/usr/local/include -I/usr/local/include/eigen3 -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv -I/usr/local/dinclude/eigen3  -g -fPIC   -std=c++11 -o CMakeFiles/datafusion.dir/src/cluster.o -c /home/guyu/image-lidar-fusion/src/cluster.cc",
+  "file": "/home/guyu/image-lidar-fusion/src/cluster.cc"
 }
 ]
