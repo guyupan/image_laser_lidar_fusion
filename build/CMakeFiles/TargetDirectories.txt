@@ -1,3 +1,4 @@
 /home/guyu/image-lidar-fusion/build/CMakeFiles/rebuild_cache.dir
 /home/guyu/image-lidar-fusion/build/CMakeFiles/edit_cache.dir
 /home/guyu/image-lidar-fusion/build/CMakeFiles/main.dir
+/home/guyu/image-lidar-fusion/build/CMakeFiles/datafusion.dir

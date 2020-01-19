@@ -114,7 +114,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=main
+CMAKE_PROJECT_NAME:STATIC=datafusion
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -174,11 +174,26 @@ EIGEN_INCLUDE_DIR:PATH=/usr/local/include/eigen3
 //Single output directory for building all executables.
 EXECUTABLE_OUTPUT_PATH:PATH=
 
+//The directory containing a CMake configuration file for Eigen3.
+Eigen3_DIR:PATH=Eigen3_DIR-NOTFOUND
+
 //Single output directory for building all libraries.
 LIBRARY_OUTPUT_PATH:PATH=
 
 //The directory containing a CMake configuration file for OpenCV.
 OpenCV_DIR:PATH=/opt/ros/kinetic/share/OpenCV-3.3.1-dev
+
+//Value Computed by CMake
+datafusion_BINARY_DIR:STATIC=/home/guyu/image-lidar-fusion/build
+
+//Dependencies for target
+datafusion_LIB_DEPENDS:STATIC=
+
+//Value Computed by CMake
+datafusion_SOURCE_DIR:STATIC=/home/guyu/image-lidar-fusion
+
+//The directory containing a CMake configuration file for eigen3.
+eigen3_DIR:PATH=eigen3_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for gflags.
 gflags_DIR:PATH=/usr/local/lib/cmake/gflags
@@ -325,6 +340,8 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: EIGEN_INCLUDE_DIR
 EIGEN_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Eigen3_DIR
+Eigen3_DIR-ADVANCED:INTERNAL=1
 //Details about finding OpenCV
 FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/opt/ros/kinetic][v3.3.1()]
 //ADVANCED property for variable: gflags_DIR
