@@ -1,13 +1,14 @@
 #include <iostream>
 
-#include "include/pointXYZRGB.h"
-#include "include/image_process.h"
-#include "include/readfile.h"
-#include "include/cluster.h"
-#include "include/reprojection.h"
-#include "include/reprojectioneror.h"
+#include "pointXYZRGB.h"
+#include "image_process.h"
+#include "readfile.h"
+#include "cluster.h"
+#include "reprojection.h"
+#include "reprojectioneror.h"
 
-void pairing_center_points( std::vector<std::pair<pointXYZRGB, Eigen::Matrix<double, 2, 1>>>& paired_center_points )
+void pairing_center_points( std::vector<std::pair<pointXYZRGB, Eigen::Matrix<double, 2, 1>>>& paired_center_points, Eigen::Matrix4d& eigen_T,
+ Eigen::Matrix3d& eigen_Cam_intrin, Eigen::Matrix<double, 5, 1>& eigen_Cam_dist )
 {
     for (int i = 0; i < 5; i++)
     {
@@ -68,7 +69,12 @@ void pairing_center_points( std::vector<std::pair<pointXYZRGB, Eigen::Matrix<dou
 
 void test()
 {
+    Eigen::Matrix4d eigen_T;
+    Eigen::Matrix3d eigen_Cam_intrin;
+    Eigen::Matrix<double, 5, 1> eigen_Cam_dist;
     
+    std::vector<pointXYZRGB> lidar_points;
+
     std::string calib_lidar = "right_lidar_to_right_camera.yml";
     std::string calib_cam = "camera/hk_right_params.yml";
     
@@ -79,13 +85,13 @@ void test()
 
     std::vector<std::pair<pointXYZRGB, Eigen::Matrix<double, 2, 1>>> paired_center_points;
 
-    pairing_center_points(paired_center_points);
+    pairing_center_points(paired_center_points, eigen_T, eigen_Cam_intrin, eigen_Cam_dist);
 
     std::cout << paired_center_points.size() << std::endl;
 
 
     Eigen::Matrix4d T;
-    T = ceres_solve(paired_center_points);
+    T = ceres_solve(paired_center_points, eigen_T, eigen_Cam_intrin);
     
     
 
@@ -96,7 +102,7 @@ void test()
     {
     std::vector<pointXYZRGB>  lidar_points;
     Mat image;
-    int n = i;
+    int n = 1;
     std::string lidar_points_file = "./demo(1)/lidar_right/";
     std::string image_file = "_L.png";
     std::string str1, str2, str3;
@@ -126,7 +132,7 @@ void test()
 
 }
 
-
+/**
 void test1()
 {
     int n = 1;
@@ -386,6 +392,7 @@ void test3()
     imshow("image", image);
     waitKey(0);
 }
+**/
 
 int main()
 {

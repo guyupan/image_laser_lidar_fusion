@@ -190,8 +190,8 @@ struct error
 
 struct uv_error
 {
-    uv_error(Eigen::Matrix<double, 3, 1>& point3d, Eigen::Matrix<double, 2, 1>& point2d) 
-    : _point3d(point3d), _image_u(point2d(0,0)), _image_v(point2d(1,0)) {}
+    uv_error(Eigen::Matrix<double, 3, 1>& point3d, Eigen::Matrix<double, 2, 1>& point2d, Eigen::Matrix3d& eigen_Cam_intrin) 
+    : _point3d(point3d), _image_u(point2d(0,0)), _image_v(point2d(1,0)), _eigen_Cam_intrin(eigen_Cam_intrin) {}
 
     bool operator()(const double* const param, double* residuals) const
     {
@@ -235,8 +235,8 @@ struct uv_error
         double pu_cam1 = v_rot[0] / v_rot[2];
         double pv_cam1 = v_rot[1] / v_rot[2];
 
-        double pu = eigen_Cam_intrin(0,0) * pu_cam1 + eigen_Cam_intrin(0,2);
-        double pv = eigen_Cam_intrin(1,1) * pv_cam1 + eigen_Cam_intrin(1,2);
+        double pu = _eigen_Cam_intrin(0,0) * pu_cam1 + _eigen_Cam_intrin(0,2);
+        double pv = _eigen_Cam_intrin(1,1) * pv_cam1 + _eigen_Cam_intrin(1,2);
 
         residuals[0] = (pu-_image_u) * (pu-_image_u) + (pv-_image_v)*(pv-_image_v);
         //residuals[0] = (pu-_image_u) + (pv-_image_v);
@@ -247,9 +247,10 @@ struct uv_error
     Eigen::Matrix<double, 3, 1> _point3d;
     double _image_u;
     double _image_v;
+    Eigen::Matrix3d _eigen_Cam_intrin;
 };
 
-Eigen::Matrix4d ceres_solve( std::vector<std::pair<pointXYZRGB, Eigen::Matrix<double, 2, 1>>>& paired_center_points)
+Eigen::Matrix4d ceres_solve( std::vector<std::pair<pointXYZRGB, Eigen::Matrix<double, 2, 1>>>& paired_center_points, Eigen::Matrix4d& eigen_T, Eigen::Matrix3d& eigen_Cam_intrin)
 {
     double camera[6];
     cal_angleAxis_from_matrix(eigen_T, camera);
@@ -277,7 +278,7 @@ Eigen::Matrix4d ceres_solve( std::vector<std::pair<pointXYZRGB, Eigen::Matrix<do
         point2d << paired_center_points[i].second(0,0), paired_center_points[i].second(1,0);
 
         ceres::CostFunction* cost_function = 
-            new ceres::NumericDiffCostFunction<uv_error, ceres::FORWARD, 1, 6>(new uv_error(point3d, point2d));
+            new ceres::NumericDiffCostFunction<uv_error, ceres::FORWARD, 1, 6>(new uv_error(point3d, point2d, eigen_Cam_intrin));
 
         problem.AddResidualBlock(cost_function,
                                  NULL,

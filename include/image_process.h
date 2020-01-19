@@ -4,6 +4,9 @@
 #include <eigen3/Eigen/Dense>
 #include <opencv2/opencv.hpp>
 #include "pointXYZRGB.h"
+#include <iostream>
+#include <fstream>
+#include <opencv2/core/eigen.hpp>
 using namespace cv;
 
 void show_B_histogram(Mat& source_image)

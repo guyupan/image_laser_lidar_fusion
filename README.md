@@ -1,2 +1,5 @@
 # image_laser_lidar_fusion
-image data and laser lidar data fusion
+相机与激光雷达外参标定
+
+1、初始外参融合点云与图像数据，提取匹配点。
+2、根据匹配点，最小化重投影误差优化外参。
